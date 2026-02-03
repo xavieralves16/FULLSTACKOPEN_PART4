@@ -109,3 +109,45 @@ describe('most blogs', () => {
     })
   })
 })
+
+describe('most likes', () => {
+  const blogs = [
+    {
+      _id: '1',
+      title: 'Go To Statement Considered Harmful',
+      author: 'Edsger W. Dijkstra',
+      url: 'http://example.com/1',
+      likes: 5,
+    },
+    {
+      _id: '2',
+      title: 'Another Dijkstra blog',
+      author: 'Edsger W. Dijkstra',
+      url: 'http://example.com/2',
+      likes: 12,
+    },
+    {
+      _id: '3',
+      title: 'Clean Code',
+      author: 'Robert C. Martin',
+      url: 'http://example.com/3',
+      likes: 10,
+    },
+    {
+      _id: '4',
+      title: 'Agile Software Development',
+      author: 'Robert C. Martin',
+      url: 'http://example.com/4',
+      likes: 7,
+    }
+  ]
+
+  test('returns the author with the most total likes', () => {
+    const result = listHelper.mostLikes(blogs)
+
+    assert.deepStrictEqual(result, {
+      author: 'Edsger W. Dijkstra',
+      likes: 17
+    })
+  })
+})
