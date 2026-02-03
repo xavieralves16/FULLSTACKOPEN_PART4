@@ -1,3 +1,3 @@
-### DELETE a person by ID
-# Substitua <id> pelo _id real de um contato existente
-DELETE https://fullstackopen-part3-89nf.onrender.com/api/persons/698089de6420dc22a0b78466
+GET http://localhost:3003/api/blogs
+Accept: application/json
+
