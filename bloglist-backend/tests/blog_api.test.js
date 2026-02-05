@@ -68,6 +68,23 @@ test('a valid blog can be added', async () => {
   assert(titles.includes('Async/Await in Node.js'))
 })
 
+test('if likes is missing, it defaults to 0', async () => {
+  const newBlog = {
+    title: 'Blog without likes',
+    author: 'Anonymous',
+    url: 'https://example.com/no-likes'
+    // likes intentionally missing
+  }
+
+  const response = await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+  assert.strictEqual(response.body.likes, 0)
+})
+
 
 after(async () => {
   await mongoose.connection.close()
