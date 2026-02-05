@@ -46,6 +46,28 @@ test('blog posts have id property instead of _id', async () => {
   assert.strictEqual(blog._id, undefined)
 })
 
+test('a valid blog can be added', async () => {
+  const newBlog = {
+    title: 'Async/Await in Node.js',
+    author: 'Xavier Alves',
+    url: 'https://example.com/async-await',
+    likes: 7
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+  const response = await api.get('/api/blogs')
+
+  assert.strictEqual(response.body.length, initialBlogs.length + 1)
+
+  const titles = response.body.map(b => b.title)
+  assert(titles.includes('Async/Await in Node.js'))
+})
+
 
 after(async () => {
   await mongoose.connection.close()
